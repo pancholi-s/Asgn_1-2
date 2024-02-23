@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registration</h1>
+        <form id="registrationForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="button" id="togglePassword">Show Password</button><br><br>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            var formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+
+            // Save data to local storage
+            localStorage.setItem('userData', JSON.stringify(formData));
+
+            // Alert for successful registration
+            alert('Successfully registered!');
+
+            // Redirect to home page
+            window.location.href = 'index.html';
+        });
+
+        // Password toggle functionality
+        var togglePasswordButton = document.getElementById('togglePassword');
+        var passwordInput = document.getElementById('password');
+
+        togglePasswordButton.addEventListener('click', function() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePasswordButton.textContent = 'Hide Password';
+            } else {
+                passwordInput.type = 'password';
+                togglePasswordButton.textContent = 'Show Password';
+            }
+        });
+    </script>
+</body>
+</html>
